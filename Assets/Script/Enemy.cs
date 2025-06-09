@@ -8,12 +8,18 @@ public class Enemy : MonoBehaviour
     public GameObject Chest;
     public GameObject Panel;
     public bool IsDead = false;
+    public GameMaster GameMaster; // Reference to GameMaster script
     
     private int Dig = 100;
-    [SerializeField] private TMP_Text healthText; // Reference ke TextMeshPro UI
+    [SerializeField] private TMP_Text healthText; // Reference ke TextMeshPr
+    public PlayerTypingChallenge PlayerAttack; // Reference to PlayerAttack script   
 
-    private void Start()
+    public void Reset()
     {
+        IsDead = false;
+        Dig = 100;
+        Panel.SetActive(false);
+        Chest.SetActive(false);
         UpdateHealthText();
     }
 
@@ -26,7 +32,6 @@ public class Enemy : MonoBehaviour
 
         if (Dig <= 0)
         {
-            
             Die();
         }
     }
@@ -34,7 +39,9 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        PlayerAttack.EndChallenge();
         IsDead = true;
+        GameMaster.Won();
         Panel.SetActive(false);
         Chest.SetActive(true);
     }

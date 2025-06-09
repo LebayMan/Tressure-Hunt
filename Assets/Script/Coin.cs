@@ -9,7 +9,7 @@ public class Coin : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             GameMaster.instance.AddScore(scoreValue);
-            Destroy(gameObject);
+            gameObject.SetActive(false); // Disable the coin instead of destroying it
         }
     }
 }

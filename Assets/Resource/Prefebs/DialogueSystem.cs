@@ -28,6 +28,11 @@ public class DialogueSystem : MonoBehaviour
             NextLine();
         }
     }
+    public void ResetLine()
+    {
+        currentLineIndex = 0;
+        ShowLine();
+    }
 
     public void ShowLine()
     {

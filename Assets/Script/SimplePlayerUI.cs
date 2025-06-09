@@ -18,9 +18,17 @@ public class SimplePlayerUI : MonoBehaviour
 
     [Header("Inventory")]
     public int coinAmount = 0;
+    [Header("Settings and references")]
+    public GameObject Player;
+    public GameObject ScorePanel;
+    public Teleporter teleporter;
+    public GameObject Losepanel;
+    public GameObject Winpanel;
+    public PlayerTypingChallenge playerAttack;
 
     void Start()
     {
+        playerAttack = GetComponent<PlayerTypingChallenge>();
         currentHealth = maxHealth;
         currentExp = 0f;
         UpdateUI();
@@ -29,6 +37,13 @@ public class SimplePlayerUI : MonoBehaviour
     public void AddHealth(float amount)
     {
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+        if (currentHealth <= 0)
+        {
+            playerAttack.EndChallenge();
+            Losepanel.SetActive(true);
+            ScorePanel.SetActive(false);
+            playerAttack.enabled = false;
+        }
         UpdateUI();
     }
 
@@ -43,6 +58,10 @@ public class SimplePlayerUI : MonoBehaviour
         coinAmount += amount;
         UpdateUI();
     }
+    public void attackreset()
+    {
+        playerAttack.enabled = true;
+    }
 
     void UpdateUI()
     {
@@ -55,4 +74,5 @@ public class SimplePlayerUI : MonoBehaviour
         if (coinText != null)
             coinText.text = "Coin : " + coinAmount.ToString();
     }
+    
 }

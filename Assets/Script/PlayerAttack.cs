@@ -67,7 +67,7 @@ public class PlayerTypingChallenge : MonoBehaviour
                 enemy = hit.GetComponent<Enemy>();
                 if (enemy != null)
                 {
-                if(enemy.IsDead) return; 
+                    if (enemy.IsDead || playerUI.currentHealth <= 0) return;
                     enemy.Panel.SetActive(true);
                     StartChallenge(enemy);
                     break;
@@ -78,6 +78,7 @@ public class PlayerTypingChallenge : MonoBehaviour
 
     void StartChallenge(Enemy enemy)
     {
+        Debug.Log("Challenge started with enemy: " + enemy.name);
         currentEnemy = enemy.gameObject;
         isChallengeActive = true;
 
@@ -140,8 +141,9 @@ public class PlayerTypingChallenge : MonoBehaviour
         }
     }
 
-    void EndChallenge()
+    public void EndChallenge()
     {
+        Debug.Log("Challenge ended.");
         isChallengeActive = false;
         typingCanvas.enabled = false;
         typingCamera.enabled = false;

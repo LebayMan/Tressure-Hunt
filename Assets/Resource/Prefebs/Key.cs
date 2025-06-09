@@ -6,16 +6,21 @@ public class Key : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void OnTriggerEnter(Collider collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             doeskeygetpickedup = true;
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
+    }
+    public void ResetKey()
+    {
+        doeskeygetpickedup = false;
+        gameObject.SetActive(true);
     }
 }

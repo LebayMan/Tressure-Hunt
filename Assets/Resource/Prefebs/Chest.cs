@@ -16,7 +16,7 @@ public class Chest : MonoBehaviour
             if (key.doeskeygetpickedup == true)
             {
                 GameMaster.instance.playerUI.AddCoin(10);
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
         }
     }
